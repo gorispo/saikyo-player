@@ -207,23 +207,24 @@ function result(){
  const msg=`最強の選手を作れ！で総合評価${rank}【${tt}】を作った！ ${cm(v.h)}cm/${kg(v.w)}kg・推定年俸${sal}`;
  $("xs").href="https://x.com/intent/post?text="+encodeURIComponent(msg)+"&hashtags="+encodeURIComponent("最強の選手を作れ,Bリーグ");
   $("svb").onclick=async()=>{
-    try{
-      const b=await blob();
-      if(!b)throw new Error("canvas export failed");
-      const url=URL.createObjectURL(b);
-      const a=document.createElement("a");
-      a.href=url;
-      a.download="saikyo-player.png";
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      setTimeout(()=>URL.revokeObjectURL(url),1000);
-      note("保存しました");
-    }catch(e){
-      note("保存できませんでした。上の画像を長押しして保存してください。");
-    }
-  };
-await dl.save({filename:"saikyo-player.png",data:await blob()});note("保存しました")}catch(e){if(e&&e.code=="declined")return;note("保存できませんでした。上の画像を長押しして保存してください。")}};
+  try{
+    const b=await blob();
+    if(!b)throw new Error("canvas export failed");
+
+    const url=URL.createObjectURL(b);
+    const a=document.createElement("a");
+    a.href=url;
+    a.download="saikyo-player.png";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+
+    setTimeout(()=>URL.revokeObjectURL(url),1000);
+    note("保存しました");
+  }catch(e){
+    note("保存できませんでした。上の画像を長押しして保存してください。");
+  }
+};
  if(navigator.share)$("shb").onclick=async()=>{try{const f=new File([await blob()],"saikyo-player.png",{type:"image/png"});if(navigator.canShare&&navigator.canShare({files:[f]}))await navigator.share({files:[f],text:msg});else await navigator.share({text:msg})}catch(e){}};else $("shb").hidden=true;
  window.scrollTo(0,0);
 }
