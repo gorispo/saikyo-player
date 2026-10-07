@@ -46,6 +46,16 @@ td{padding:7px 4px;border-bottom:1px solid var(--bd)}td:last-child{text-align:ri
 <div id="result" hidden></div>
 </div>
 <script>
+window.onerror=function(msg,src,line,col,error){
+  const e=document.getElementById("jsError");
+  if(e){
+    e.style.display="block";
+    e.textContent="JavaScriptエラー: "+msg+"（"+line+"行目）";
+  }
+  return false;
+};
+</script>
+<script>
 const S=[["h","身長"],["w","体重"],["s","シュート"],["hd","ハンドリング"],["r","走力"],["p","パス"],["st","スタミナ"],["j","ジャンプ"]],N=S.length;
 const Q=[
 ["1891年、ネイスミスが最初のバスケットボールで使ったゴールは？","桃用のカゴ","木製の樽","鉄の輪","網付きバケツ"],
